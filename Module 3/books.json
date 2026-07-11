@@ -1,0 +1,106 @@
+[
+  {
+    "book_id": 1,
+    "title": "Sapiens",
+    "author": "Yuval Noah Harari",
+    "genre": "History",
+    "pages": 443,
+    "rating": 4.8
+  },
+  {
+    "book_id": 2,
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "genre": "Fiction",
+    "pages": 208,
+    "rating": 4.5
+  },
+  {
+    "book_id": 3,
+    "title": "A Brief History of Time",
+    "author": "Stephen Hawking",
+    "genre": "Science",
+    "pages": 212,
+    "rating": 4.6
+  },
+  {
+    "book_id": 4,
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "genre": "Self-Help",
+    "pages": 320,
+    "rating": 4.9
+  },
+  {
+    "book_id": 5,
+    "title": "1984",
+    "author": "George Orwell",
+    "genre": "Dystopian",
+    "pages": 328,
+    "rating": 4.7
+  },
+  {
+    "book_id": 6,
+    "title": "The Pragmatic Programmer",
+    "author": "Andrew Hunt & David Thomas",
+    "genre": "Programming",
+    "pages": 352,
+    "rating": 4.9
+  },
+  {
+    "book_id": 7,
+    "title": "Clean Code",
+    "author": "Robert C. Martin",
+    "genre": "Programming",
+    "pages": 464,
+    "rating": 4.8
+  },
+  {
+    "book_id": 8,
+    "title": "Rich Dad Poor Dad",
+    "author": "Robert T. Kiyosaki",
+    "genre": "Finance",
+    "pages": 336,
+    "rating": 4.6
+  },
+  {
+    "book_id": 9,
+    "title": "The Hobbit",
+    "author": "J.R.R. Tolkien",
+    "genre": "Fantasy",
+    "pages": 310,
+    "rating": 4.8
+  },
+  {
+    "book_id": 10,
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "genre": "Classic",
+    "pages": 281,
+    "rating": 4.7
+  },
+  {
+    "book_id": 11,
+    "title": "John Wick",
+    "author": "Derek Kolstad",
+    "genre": "Fighting",
+    "pages": 288,
+    "rating": 4.9
+  },
+  {
+    "book_id": 12,
+    "title": "John Wick 2",
+    "author": "Derek Kolstad",
+    "genre": "Fighting",
+    "pages": 278,
+    "rating": 4.9
+  },
+  {
+    "book_id": 13,
+    "title": "The Silent Patient",
+    "author": "Alex Michaelides",
+    "genre": "Fiction",
+    "pages": 336,
+    "rating": 4.4
+  }
+]
