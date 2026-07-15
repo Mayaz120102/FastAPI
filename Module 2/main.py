@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Path, HTTPException, Query
 from pydantic import BaseModel, Field
-from typing import Annotated
+from typing import Annotated, Optional
 import json
 from fastapi.responses import JSONResponse
 
@@ -9,7 +9,7 @@ app = FastAPI()
 
 class Student(BaseModel):
     id: Annotated[str, Field(..., description="student id", example="S001")]
-    name: str
+    name: Annotated[str, Field(..., description="student name")]
     age: Annotated[int, Field(..., gt=5, lt=18, description="age")]
     student_class: Annotated[int, Field(..., gt=1, lt=13, description="class")]
     roll: Annotated[int, Field(..., gt=0, lt=101, description="roll")]
@@ -17,6 +17,17 @@ class Student(BaseModel):
     English_marks: Annotated[int, Field(..., gt=0, lt=101)]
     Science_marks: Annotated[int, Field(..., gt=0, lt=101)]
     phone: Annotated[str, Field(..., example="01XXXXXXXX")]
+
+
+class StudentUpdate(BaseModel):
+    name: Annotated[Optional[str], Field(default=None)]
+    age: Annotated[Optional[str], Field(default=None)]
+    student_class: Annotated[Optional[int], Field(default=None)]
+    roll: Annotated[Optional[int], Field(default=None)]
+    Math_marks: Annotated[Optional[int], Field(default=None)]
+    English_marks: Annotated[Optional[int], Field(default=None)]
+    Science_marks: Annotated[Optional[int], Field(default=None)]
+    phone: Annotated[Optional[int], Field(default=None)]
 
 
 def load_data():
@@ -106,4 +117,21 @@ def create_student(student: Student):
 
     return JSONResponse(
         status_code=201, content={"message": "Student Created Successfully"}
+    )
+
+
+@app.put("/edit/{student_id}")
+def update_student(student_id: str, student: StudentUpdate):
+
+    data = load_data()
+
+    if student_id not in data:
+        raise HTTPException(status_code=404, detail="Student not found")
+
+    data[student_id].update(student.model_dump(exclude_unset=True))
+
+    save_data(data)
+
+    return JSONResponse(
+        status_code=200, content={"message": "Student Updated Successfully"}
     )
