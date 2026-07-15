@@ -1,7 +1,22 @@
-from fastapi import FastAPI, Path, HTTPException, Query, Body
+from fastapi import FastAPI, Path, HTTPException, Query
+from pydantic import BaseModel, Field
+from typing import Annotated
 import json
+from fastapi.responses import JSONResponse
 
 app = FastAPI()
+
+
+class Student(BaseModel):
+    id: Annotated[str, Field(..., description="student id", example="S001")]
+    name: str
+    age: Annotated[int, Field(..., gt=5, lt=18, description="age")]
+    student_class: Annotated[int, Field(..., gt=1, lt=13, description="class")]
+    roll: Annotated[int, Field(..., gt=0, lt=101, description="roll")]
+    Math_marks: Annotated[int, Field(..., gt=0, lt=101)]
+    English_marks: Annotated[int, Field(..., gt=0, lt=101)]
+    Science_marks: Annotated[int, Field(..., gt=0, lt=101)]
+    phone: Annotated[str, Field(..., example="01XXXXXXXX")]
 
 
 def load_data():
@@ -45,18 +60,18 @@ def view_info(student_id: str = Path(..., description="student id", example="S00
 @app.get("/sort")
 def view_sorted_by(
     sorted_by: str = Query(
-        ..., description="sort on the basis of class, age , roll, marks"
+        ..., description="sort on the basis of student_class, age , roll, marks"
     ),
     order: str = Query("asc", description="choose asc or desc"),
 ):
 
     valid_fields = [
         "age",
-        "class",
+        "student_class",
         "roll",
-        "Math marks",
-        "English marks",
-        "Science marks",
+        "Math_marks",
+        "English_marks",
+        "Science_marks",
     ]
     if sorted_by not in valid_fields:
         raise HTTPException(
@@ -78,14 +93,17 @@ def view_sorted_by(
 
 
 @app.post("/create")
-def create_student(student: dict = Body()):
+def create_student(student: Student):
 
     data = load_data()
 
-    student_id = student["id"]
+    if student.id in data:
+        raise HTTPException(status_code=400, detail="Student already exists")
 
-    data[student_id] = student
-    del data[student_id]["id"]
+    data[student.id] = student.model_dump(exclude=["id"])
+
     save_data(data)
 
-    return "Succesfully created student"
+    return JSONResponse(
+        status_code=201, content={"message": "Student Created Successfully"}
+    )
