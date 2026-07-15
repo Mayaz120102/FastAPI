@@ -128,15 +128,5 @@
     "English_marks": 77,
     "Science_marks": 70,
     "phone": "0146543434"
-  },
-  "S015": {
-    "name": "Abrar Chowdhury",
-    "age": 10,
-    "student_class": 2,
-    "roll": 2,
-    "Math_marks": 70,
-    "English_marks": 77,
-    "Science_marks": 70,
-    "phone": "0146543434"
   }
 }
