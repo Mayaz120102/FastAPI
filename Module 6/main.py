@@ -6,6 +6,7 @@ from models import Todos
 from typing import Annotated, Optional
 from database import engine, SessionLocal
 from fastapi.responses import JSONResponse
+from router import auth
 
 app = FastAPI()
 
@@ -16,6 +17,7 @@ class Todo(BaseModel):
     description: str = Field(max_length=100)
     priority: int = Field(gt=0, lt=6)
     completed: bool
+    owner_id : int 
 
 
 class TodoUpdate(BaseModel):
@@ -26,6 +28,7 @@ class TodoUpdate(BaseModel):
 
 
 models.Base.metadata.create_all(bind=engine)
+app.include_router(auth.router)
 
 
 def get_db():
